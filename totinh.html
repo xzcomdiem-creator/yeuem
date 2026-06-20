@@ -1,256 +1,87 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Có điều muốn nói với em...</title>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Be+Vietnam+Pro:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
-
-    body {
-      min-height: 100vh;
-      background: #0a0010;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem 1.5rem;
-      overflow-x: hidden;
-      font-family: 'Be Vietnam Pro', sans-serif;
-    }
-
-    #sc {
-      position: fixed; top:0; left:0;
-      width:100%; height:100%;
-      pointer-events:none; z-index:0;
-    }
-
-    .fhc {
-      position: fixed; top:0; left:0;
-      width:100%; height:100%;
-      pointer-events:none; z-index:1;
-      overflow: hidden;
-    }
-
-    .fh {
-      position: absolute; bottom:-50px;
-      animation: floatUp linear infinite; opacity:0;
-    }
-
-    @keyframes floatUp {
-      0%   { transform:translateY(0) rotate(0deg) scale(0.8); opacity:0; }
-      10%  { opacity:0.7; }
-      90%  { opacity:0.3; }
-      100% { transform:translateY(-110vh) rotate(30deg) scale(1.1); opacity:0; }
-    }
-
-    .cw {
-      position: relative;
-      z-index: 10;
-      text-align: center;
-      width: 100%;
-      max-width: 500px;
-      margin: 0 auto;
-    }
-
-    .ttl {
-      font-family: 'Dancing Script', cursive;
-      font-size: clamp(1.4rem, 5vw, 2.2rem);
-      color: #f9c0cb;
-      margin-bottom: 0.3rem;
-      text-shadow: 0 0 20px rgba(255,120,150,0.5);
-    }
-
-    .sub {
-      font-size: 0.75rem;
-      color: rgba(255,200,210,0.5);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 2rem;
-    }
-
-    .hc {
-      position: relative;
-      width: 160px; height: 148px;
-      margin: 0 auto 1rem;
-      cursor: pointer;
-      filter: drop-shadow(0 0 30px rgba(255,80,120,0.5));
-      transition: filter 0.3s;
-    }
-
-    .hc:hover { filter: drop-shadow(0 0 45px rgba(255,80,120,0.8)); }
-
-    .hsv { width:100%; height:100%; animation: hb 1.2s ease-in-out infinite; }
-
-    @keyframes hb {
-      0%,100%{ transform:scale(1); }
-      14%    { transform:scale(1.13); }
-      28%    { transform:scale(1); }
-      42%    { transform:scale(1.08); }
-    }
-
-    .hc:hover .hsv { animation: hbf 0.5s ease-in-out infinite; }
-    @keyframes hbf { 0%,100%{ transform:scale(1); } 50%{ transform:scale(1.18); } }
-
-    .pr {
-      position: absolute; top:50%; left:50%;
-      transform: translate(-50%,-52%);
-      width:130px; height:130px; border-radius:50%;
-      border: 2px solid rgba(255,100,130,0.4);
-      animation: pr 1.8s ease-out infinite;
-      pointer-events: none;
-    }
-    .pr:nth-child(2){ animation-delay:0.6s; }
-    .pr:nth-child(3){ animation-delay:1.2s; }
-
-    @keyframes pr {
-      0%  { transform:translate(-50%,-52%) scale(0.8); opacity:0.8; }
-      100%{ transform:translate(-50%,-52%) scale(2.2); opacity:0; }
-    }
-
-    .hint {
-      font-size: 0.68rem;
-      color: rgba(255,180,200,0.35);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
-      animation: fio 3s ease-in-out infinite;
-    }
-    @keyframes fio { 0%,100%{opacity:0.35} 50%{opacity:0.7} }
-
-    .mc {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,150,180,0.15);
-      border-radius: 16px;
-      padding: 1.5rem 1.5rem;
-      margin-bottom: 1.2rem;
-      backdrop-filter: blur(10px);
-      position: relative;
-      width: 100%;
-    }
-
-    .mc::before {
-      content:'';
-      position: absolute; top:0; left:0; right:0; height:1px;
-      background: linear-gradient(90deg,transparent,rgba(255,150,180,0.4),transparent);
-    }
-
-    .mm {
-      font-family: 'Dancing Script', cursive;
-      font-size: clamp(1.1rem, 3.5vw, 1.5rem);
-      color: #ffe0e8;
-      line-height: 1.6;
-      margin-bottom: 0.8rem;
-    }
-
-    .ms {
-      font-size: 0.8rem;
-      color: rgba(255,200,215,0.6);
-      line-height: 1.7;
-      font-weight: 300;
-    }
-
-    .br {
-      display: flex;
-      gap: 0.75rem;
-      justify-content: center;
-      margin-bottom: 1rem;
-      flex-wrap: wrap;
-      align-items: center;
-      width: 100%;
-    }
-
-    .byes {
-      background: linear-gradient(135deg,#ff4d6d,#c9184a);
-      color: white; border: none;
-      border-radius: 50px;
-      font-size: 0.88rem; font-weight: 500;
-      cursor: pointer;
-      letter-spacing: 0.05em;
-      box-shadow: 0 4px 20px rgba(255,77,109,0.4);
-      transition: all 0.3s;
-      font-family: 'Be Vietnam Pro', sans-serif;
-      padding: 0.7rem 2rem;
-      white-space: nowrap;
-    }
-    .byes:hover { transform:scale(1.06); box-shadow:0 6px 28px rgba(255,77,109,0.6); }
-
-    .bno {
-      background: transparent;
-      color: rgba(255,200,215,0.6);
-      border: 1px solid rgba(255,150,180,0.25);
-      padding: 0.55rem 1.4rem;
-      border-radius: 50px;
-      font-size: 0.8rem;
-      cursor: pointer;
-      transition: all 0.25s;
-      font-family: 'Be Vietnam Pro', sans-serif;
-      white-space: nowrap;
-    }
-    .bno:hover { border-color:rgba(255,150,180,0.5); color:rgba(255,220,230,0.8); }
-
-    .no-count {
-      font-size: 0.68rem;
-      color: rgba(255,150,170,0.45);
-      margin-top: 0.3rem;
-      letter-spacing: 0.05em;
-      min-height: 1.2rem;
-    }
-
-    .rm {
-      min-height: 2rem;
-      font-family: 'Dancing Script', cursive;
-      font-size: 1.2rem;
-      color: #ffb3c6;
-      transition: all 0.5s;
-      opacity: 0;
-      transform: translateY(5px);
-      margin-top: 0.3rem;
-    }
-    .rm.show { opacity:1; transform:translateY(0); }
-
-    .sp { position:fixed; pointer-events:none; z-index:20; }
-    .spe {
-      position: absolute; border-radius:50%;
-      animation: sa 0.8s ease-out forwards;
-    }
-    @keyframes sa {
-      0%  { transform:translate(0,0) scale(1); opacity:1; }
-      100%{ transform:translate(var(--tx),var(--ty)) scale(0); opacity:0; }
-    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{min-height:100vh;background:#08000f;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem 1.5rem;overflow-x:hidden;font-family:'Be Vietnam Pro',sans-serif;}
+    canvas#sc{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}
+    #aurora{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.2;}
+    #fhc{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:hidden;}
+    .fh{position:absolute;bottom:-60px;animation:floatUp linear infinite;opacity:0;user-select:none;}
+    @keyframes floatUp{0%{transform:translateY(0) rotate(-10deg) scale(0.7);opacity:0;}8%{opacity:0.9;}92%{opacity:0.3;}100%{transform:translateY(-115vh) rotate(20deg) scale(1.2);opacity:0;}}
+    canvas#pc{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:2;}
+    .cw{position:relative;z-index:10;text-align:center;width:100%;max-width:480px;margin:0 auto;}
+    .ttl{font-family:'Dancing Script',cursive;font-size:clamp(1.5rem,5vw,2.3rem);color:#f9c0cb;margin-bottom:0.25rem;animation:titleGlow 3s ease-in-out infinite;}
+    @keyframes titleGlow{0%,100%{text-shadow:0 0 20px rgba(255,100,140,0.5),0 0 40px rgba(255,80,120,0.2);}50%{text-shadow:0 0 40px rgba(255,100,140,0.9),0 0 80px rgba(255,80,120,0.5),0 0 120px rgba(255,60,100,0.2);}}
+    .sub{font-size:0.73rem;color:rgba(255,200,210,0.4);letter-spacing:0.18em;text-transform:uppercase;margin-bottom:2rem;}
+    .hc{position:relative;width:170px;height:158px;margin:0 auto 0.8rem;cursor:pointer;filter:drop-shadow(0 0 25px rgba(255,80,120,0.6));transition:filter 0.3s;}
+    .hc:hover{filter:drop-shadow(0 0 50px rgba(255,80,120,1));}
+    .hsv{width:100%;height:100%;animation:hb 1.1s ease-in-out infinite;}
+    @keyframes hb{0%,100%{transform:scale(1);}12%{transform:scale(1.15);}24%{transform:scale(1);}36%{transform:scale(1.09);}60%{transform:scale(1);}}
+    .hc:hover .hsv{animation:hbf 0.45s ease-in-out infinite;}
+    @keyframes hbf{0%,100%{transform:scale(1);}50%{transform:scale(1.2);}}
+    .pr{position:absolute;top:50%;left:50%;transform:translate(-50%,-52%);width:130px;height:130px;border-radius:50%;border:1.5px solid rgba(255,100,130,0.5);animation:pr 2s ease-out infinite;pointer-events:none;}
+    .pr:nth-child(2){animation-delay:0.66s;border-color:rgba(255,150,180,0.3);}
+    .pr:nth-child(3){animation-delay:1.33s;border-color:rgba(255,200,220,0.2);}
+    @keyframes pr{0%{transform:translate(-50%,-52%) scale(0.7);opacity:1;}100%{transform:translate(-50%,-52%) scale(2.8);opacity:0;}}
+    .hint{font-size:0.68rem;color:rgba(255,180,200,0.3);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1.4rem;animation:fio 2.5s ease-in-out infinite;transition:opacity 0.5s;}
+    @keyframes fio{0%,100%{opacity:0.3;}50%{opacity:0.7;}}
+    .mc{background:rgba(255,255,255,0.04);border:1px solid rgba(255,150,180,0.12);border-radius:18px;padding:1.5rem;margin-bottom:1.2rem;width:100%;position:relative;animation:cardIn 0.6s cubic-bezier(0.34,1.56,0.64,1) forwards;}
+    @keyframes cardIn{from{opacity:0;transform:translateY(20px) scale(0.95);}to{opacity:1;transform:translateY(0) scale(1);}}
+    .mc::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,150,180,0.5),transparent);}
+    .mc::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,100,140,0.2),transparent);}
+    .mm{font-family:'Dancing Script',cursive;font-size:clamp(1.1rem,3.5vw,1.5rem);color:#ffe0e8;line-height:1.65;margin-bottom:0.8rem;}
+    .ms{font-size:0.79rem;color:rgba(255,200,215,0.55);line-height:1.75;font-weight:300;}
+    .br{display:flex;gap:0.75rem;justify-content:center;margin-bottom:0.8rem;flex-wrap:wrap;align-items:center;width:100%;}
+    .byes{background:linear-gradient(135deg,#ff4d6d,#c9184a);color:white;border:none;border-radius:50px;font-size:0.88rem;font-weight:500;cursor:pointer;letter-spacing:0.05em;transition:all 0.3s;font-family:'Be Vietnam Pro',sans-serif;padding:0.72rem 2rem;animation:yesPulse 2s ease-in-out infinite;}
+    @keyframes yesPulse{0%,100%{box-shadow:0 4px 24px rgba(255,77,109,0.5),0 0 0 0 rgba(255,77,109,0.4);}50%{box-shadow:0 4px 32px rgba(255,77,109,0.7),0 0 0 10px rgba(255,77,109,0);}}
+    .byes:hover{transform:scale(1.08);}
+    .bno{background:transparent;color:rgba(255,200,215,0.5);border:1px solid rgba(255,150,180,0.2);padding:0.55rem 1.3rem;border-radius:50px;font-size:0.78rem;cursor:pointer;transition:all 0.2s;font-family:'Be Vietnam Pro',sans-serif;white-space:nowrap;}
+    .nc{font-size:0.68rem;color:rgba(255,150,170,0.5);margin-top:0.3rem;letter-spacing:0.04em;min-height:1.1rem;}
+    .rm{min-height:2rem;font-family:'Dancing Script',cursive;font-size:1.25rem;color:#ffb3c6;transition:all 0.6s cubic-bezier(0.34,1.56,0.64,1);opacity:0;transform:translateY(8px) scale(0.95);margin-top:0.3rem;}
+    .rm.show{opacity:1;transform:translateY(0) scale(1);}
+    #sl{position:fixed;pointer-events:none;z-index:20;top:0;left:0;width:100%;height:100%;}
+    .spe{position:absolute;border-radius:50%;animation:sa ease-out forwards;}
+    @keyframes sa{0%{transform:translate(0,0) scale(1);opacity:1;}100%{transform:translate(var(--tx),var(--ty)) scale(0);opacity:0;}}
+    .ribbon{position:fixed;pointer-events:none;z-index:15;border-radius:2px;animation:ribbonFall linear forwards;}
+    @keyframes ribbonFall{0%{transform:translateY(0) rotate(0deg);opacity:1;}100%{transform:translateY(110vh) rotate(720deg);opacity:0;}}
   </style>
 </head>
 <body>
   <canvas id="sc"></canvas>
-  <div class="fhc" id="fhc"></div>
+  <canvas id="aurora"></canvas>
+  <div id="fhc"></div>
+  <canvas id="pc"></canvas>
+  <div id="sl"></div>
 
   <div class="cw">
     <p class="ttl">Có điều muốn nói với em...</p>
     <p class="sub">một điều thật lòng</p>
 
     <div class="hc" id="hw" onclick="onHeart(event)">
-      <div class="pr"></div>
-      <div class="pr"></div>
-      <div class="pr"></div>
+      <div class="pr"></div><div class="pr"></div><div class="pr"></div>
       <svg class="hsv" viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <radialGradient id="hg" cx="50%" cy="40%" r="60%">
-            <stop offset="0%" stop-color="#ff6b8b"/>
-            <stop offset="60%" stop-color="#e63960"/>
-            <stop offset="100%" stop-color="#9b1a38"/>
+          <radialGradient id="hg" cx="50%" cy="38%" r="62%">
+            <stop offset="0%" stop-color="#ff8fab"/>
+            <stop offset="45%" stop-color="#e63960"/>
+            <stop offset="100%" stop-color="#7d0a2a"/>
           </radialGradient>
-          <radialGradient id="sh" cx="35%" cy="30%" r="35%">
-            <stop offset="0%" stop-color="rgba(255,255,255,0.35)"/>
+          <radialGradient id="sh" cx="32%" cy="28%" r="32%">
+            <stop offset="0%" stop-color="rgba(255,255,255,0.4)"/>
             <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
           </radialGradient>
         </defs>
         <path d="M50 85 C50 85 5 55 5 28 C5 14 16 5 27.5 5 C36 5 43 9.5 50 17 C57 9.5 64 5 72.5 5 C84 5 95 14 95 28 C95 55 50 85 50 85Z" fill="url(#hg)"/>
         <path d="M50 85 C50 85 5 55 5 28 C5 14 16 5 27.5 5 C36 5 43 9.5 50 17 C57 9.5 64 5 72.5 5 C84 5 95 14 95 28 C95 55 50 85 50 85Z" fill="url(#sh)"/>
-        <text x="50" y="47" text-anchor="middle" font-size="22" fill="rgba(255,255,255,0.9)" font-family="serif">♡</text>
+        <text x="50" y="47" text-anchor="middle" font-size="20" fill="rgba(255,255,255,0.85)" font-family="serif">♡</text>
       </svg>
     </div>
-    <p class="hint">chạm vào trái tim ↑</p>
+    <p class="hint" id="hint">chạm vào trái tim ↑</p>
 
     <div class="mc" id="mc" style="display:none">
       <p class="mm">Anh muốn nói rằng...<br>anh thích em rất nhiều 💕</p>
@@ -259,151 +90,113 @@
 
     <div class="br" id="br" style="display:none">
       <button class="byes" id="byes" onclick="onYes()">💖 Có, em cũng vậy!</button>
-      <button class="bno" id="bno" onclick="onNo()">Để em nghĩ thêm...</button>
+      <button class="bno" id="bno">Để em nghĩ thêm...</button>
     </div>
-    <p class="no-count" id="nc"></p>
+    <p class="nc" id="nc"></p>
     <p class="rm" id="rm"></p>
   </div>
 
-  <div class="sp" id="sl"></div>
+<script>
+const GW=()=>window.innerWidth, GH=()=>window.innerHeight;
 
-  <script>
-    const canvas = document.getElementById('sc');
-    const ctx = canvas.getContext('2d');
-    let stars = [], W, H;
+/* Stars */
+const sc=document.getElementById('sc'), sctx=sc.getContext('2d');
+let stars=[];
+function rsz(){sc.width=GW();sc.height=GH();}
+function initS(){stars=[];for(let i=0;i<160;i++)stars.push({x:Math.random()*GW(),y:Math.random()*GH(),r:Math.random()*1.6+0.2,a:Math.random(),da:(Math.random()-0.5)*0.01+0.004,s:Math.random()*0.1+0.02});}
+function animS(){sctx.clearRect(0,0,sc.width,sc.height);stars.forEach(s=>{s.a+=s.da;if(s.a<=0||s.a>=1)s.da*=-1;s.y-=s.s;if(s.y<0){s.y=GH()+5;s.x=Math.random()*GW();}sctx.beginPath();sctx.arc(s.x,s.y,s.r,0,Math.PI*2);sctx.fillStyle=`rgba(255,210,225,${s.a})`;sctx.fill();});requestAnimationFrame(animS);}
+rsz();initS();animS();
+window.addEventListener('resize',rsz);
 
-    function resize() {
-      W = canvas.width = window.innerWidth;
-      H = canvas.height = window.innerHeight;
-    }
-    function initStars() {
-      stars = [];
-      for (let i = 0; i < 120; i++)
-        stars.push({ x:Math.random()*W, y:Math.random()*H, r:Math.random()*1.5+0.3, a:Math.random(), da:(Math.random()-0.5)*0.008+0.003, s:Math.random()*0.08+0.02 });
-    }
-    function animStars() {
-      ctx.clearRect(0,0,W,H);
-      stars.forEach(s => {
-        s.a += s.da;
-        if (s.a<=0||s.a>=1) s.da *= -1;
-        s.y -= s.s;
-        if (s.y < 0) { s.y = H+5; s.x = Math.random()*W; }
-        ctx.beginPath();
-        ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
-        ctx.fillStyle = `rgba(255,210,220,${s.a})`;
-        ctx.fill();
-      });
-      requestAnimationFrame(animStars);
-    }
-    resize(); initStars(); animStars();
-    window.addEventListener('resize', () => { resize(); });
+/* Aurora */
+const ac=document.getElementById('aurora'), actx=ac.getContext('2d');
+let aT=0;
+function animA(){ac.width=GW();ac.height=GH();aT+=0.005;const cx=GW()/2,cy=GH()*0.38;[[255,80,120],[180,60,220],[255,120,180]].forEach((c,i)=>{const g=actx.createRadialGradient(cx+Math.sin(aT+i*2.1)*GW()*0.28,cy+Math.cos(aT*0.7+i)*GH()*0.18,0,cx+Math.sin(aT+i*2.1)*GW()*0.28,cy+Math.cos(aT*0.7+i)*GH()*0.18,GW()*0.55);g.addColorStop(0,`rgba(${c.join(',')},0.14)`);g.addColorStop(1,`rgba(${c.join(',')},0)`);actx.fillStyle=g;actx.fillRect(0,0,GW(),GH());});requestAnimationFrame(animA);}
+animA();
 
-    (function makeFloats() {
-      const c = document.getElementById('fhc');
-      const em = ['❤️','💕','🌸','✨','💗','🌷','💖'];
-      for (let i = 0; i < 12; i++) {
-        const el = document.createElement('div');
-        el.className = 'fh';
-        el.textContent = em[Math.floor(Math.random()*em.length)];
-        el.style.cssText = `left:${Math.random()*90}%;font-size:${0.8+Math.random()*0.8}rem;animation-duration:${8+Math.random()*10}s;animation-delay:${Math.random()*10}s`;
-        c.appendChild(el);
-      }
-    })();
+/* Floating particles */
+const pc2=document.getElementById('pc'), pctx=pc2.getContext('2d');
+let pts=[];
+function rszP(){pc2.width=GW();pc2.height=GH();}
+function initP(){pts=[];for(let i=0;i<70;i++)pts.push({x:Math.random()*GW(),y:Math.random()*GH(),vx:(Math.random()-0.5)*0.5,vy:(Math.random()-0.5)*0.5,r:Math.random()*2.2+0.4,a:Math.random()*0.5+0.1,col:Math.random()<0.5?'255,150,180':'200,100,220'});}
+function animP(){pctx.clearRect(0,0,pc2.width,pc2.height);pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>GW())p.vx*=-1;if(p.y<0||p.y>GH())p.vy*=-1;pctx.beginPath();pctx.arc(p.x,p.y,p.r,0,Math.PI*2);pctx.fillStyle=`rgba(${p.col},${p.a})`;pctx.fill();});requestAnimationFrame(animP);}
+rszP();initP();animP();
 
-    let clicked = false;
-    function onHeart(e) {
-      spawnSparkles(e.clientX, e.clientY);
-      if (!clicked) {
-        clicked = true;
-        document.getElementById('mc').style.display = 'block';
-        document.getElementById('br').style.display = 'flex';
-      }
-    }
+/* Floating hearts */
+const fhc=document.getElementById('fhc');
+const ems=['❤️','💕','🌸','✨','💗','🌷','💖','🫶','💓','🌺','🎀','💝'];
+function makeFloats(n){for(let i=0;i<n;i++){const el=document.createElement('div');el.className='fh';el.textContent=ems[Math.floor(Math.random()*ems.length)];el.style.cssText=`left:${Math.random()*93}%;font-size:${0.7+Math.random()*1.2}rem;animation-duration:${8+Math.random()*14}s;animation-delay:${Math.random()*12}s`;fhc.appendChild(el);}}
+makeFloats(16);
 
-    function spawnSparkles(cx, cy) {
-      const layer = document.getElementById('sl');
-      const colors = ['#ffb3c6','#ff6b8b','#ffd6e0','#ffffff','#ff4d6d'];
-      for (let i = 0; i < 14; i++) {
-        const sp = document.createElement('div');
-        sp.className = 'spe';
-        const angle = (i/14)*Math.PI*2 + Math.random()*0.5;
-        const dist = 30 + Math.random()*60;
-        const s = 4 + Math.random()*5;
-        sp.style.cssText = `left:${cx}px;top:${cy}px;background:${colors[Math.floor(Math.random()*colors.length)]};width:${s}px;height:${s}px;--tx:${Math.cos(angle)*dist}px;--ty:${Math.sin(angle)*dist}px;animation-duration:${0.5+Math.random()*0.5}s`;
-        layer.appendChild(sp);
-        setTimeout(() => sp.remove(), 1000);
-      }
-    }
+/* Sparkles */
+const sl=document.getElementById('sl');
+function spawnSparkles(cx,cy,cnt=20){
+  const cols=['#ffb3c6','#ff6b8b','#ffd6e0','#fff','#ff4d6d','#e040fb','#f48fb1','#ffccdd'];
+  for(let i=0;i<cnt;i++){const sp=document.createElement('div');sp.className='spe';const angle=(i/cnt)*Math.PI*2+Math.random()*0.5,dist=20+Math.random()*90,s=3+Math.random()*8,dur=0.4+Math.random()*0.7;sp.style.cssText=`left:${cx}px;top:${cy}px;background:${cols[Math.floor(Math.random()*cols.length)]};width:${s}px;height:${s}px;--tx:${Math.cos(angle)*dist}px;--ty:${Math.sin(angle)*dist}px;animation-duration:${dur}s`;sl.appendChild(sp);setTimeout(()=>sp.remove(),(dur+0.1)*1000);}
+}
 
-    let noCount = 0;
-    const yesBtn = document.getElementById('byes');
-    let yesFontSize = 0.88;
-    let yesPad = 2.0;
+/* Confetti */
+function launchConfetti(){
+  const cols=['#ff4d6d','#ff8fab','#f8bbd0','#ce93d8','#fff','#ffb3c6','#e040fb','#ffd6e0'];
+  for(let i=0;i<90;i++){setTimeout(()=>{const r=document.createElement('div');r.className='ribbon';r.style.cssText=`left:${Math.random()*100}%;top:-20px;background:${cols[Math.floor(Math.random()*cols.length)]};width:${4+Math.random()*7}px;height:${10+Math.random()*14}px;animation-duration:${2+Math.random()*2.5}s;animation-delay:0s;transform:rotate(${Math.random()*360}deg)`;document.body.appendChild(r);setTimeout(()=>r.remove(),5000);},i*28);}
+}
 
-    const noLabels = [
-      'Để em nghĩ thêm...',
-      'Em chưa chắc...',
-      'Hmm... chưa biết',
-      'Thôi để sau nhé',
-      'Không phải lúc này',
-      'Em xin lỗi...',
-      '(nút này sắp biến mất)'
-    ];
+/* Heart click */
+let clicked=false;
+function onHeart(e){
+  spawnSparkles(e.clientX,e.clientY,24);
+  if(!clicked){clicked=true;document.getElementById('hint').style.opacity='0';document.getElementById('mc').style.display='block';document.getElementById('br').style.display='flex';}
+}
 
-    function onNo() {
-      noCount++;
-      yesFontSize = Math.min(yesFontSize + 0.18, 2.0);
-      yesPad = Math.min(yesPad + 0.3, 5.0);
-      yesBtn.style.fontSize = yesFontSize + 'rem';
-      yesBtn.style.padding = `${0.7 + noCount*0.08}rem ${yesPad}rem`;
-      yesBtn.style.boxShadow = `0 ${4+noCount*2}px ${20+noCount*6}px rgba(255,77,109,${Math.min(0.4+noCount*0.08,0.95)})`;
+/* No button runs away — never catchable */
+let noCount=0;
+const yesBtn=document.getElementById('byes');
+const noBtn=document.getElementById('bno');
+let yFS=0.88, yP=2.0;
+const noLabels=['Để em nghĩ thêm...','Em chưa chắc...','Hmm... chưa biết','Thôi để sau nhé','Không phải lúc này','Em xin lỗi...','😅 Đừng nhấn nữa...'];
+const ncMsgs=['Nút đồng ý đang lớn lên kìa... 👀','Thêm lần nữa là to hơn nữa đó 😏','Nút "Có" đang chiếm sân khấu 😂','Em ơi... nút kia to dần rồi kìa 🥺','Anh sẽ đợi dù sao đi nữa 💓','Trái tim anh chỉ chờ một chữ thôi 🫶'];
 
-      const noBtn = document.getElementById('bno');
-      if (noCount < noLabels.length) noBtn.textContent = noLabels[noCount];
-      noBtn.style.fontSize = Math.max(0.8 - noCount*0.06, 0.45) + 'rem';
-      noBtn.style.padding = `${Math.max(0.55-noCount*0.05,0.15)}rem ${Math.max(1.4-noCount*0.15,0.4)}rem`;
-      noBtn.style.opacity = Math.max(1 - noCount*0.12, 0.1) + '';
+function runAway(){
+  if(noCount>=noLabels.length-1)return;
+  noCount++;
+  yFS=Math.min(yFS+0.22,2.4); yP=Math.min(yP+0.4,6.0);
+  yesBtn.style.fontSize=yFS+'rem';
+  yesBtn.style.padding=`${0.72+noCount*0.1}rem ${yP}rem`;
 
-      const nc = document.getElementById('nc');
-      nc.textContent = noCount === 1 ? 'Nút đồng ý đang lớn lên kìa... 👀' :
-                       noCount === 2 ? 'Thêm lần nữa là nó to hơn đó 😏' :
-                       noCount === 3 ? 'Nút "Có" đang chiếm sân khấu rồi 😂' :
-                       noCount >= 5 ? 'Trái tim anh đang chờ em thôi 🥺' : '';
+  if(noCount<noLabels.length)noBtn.textContent=noLabels[noCount];
+  noBtn.style.fontSize=Math.max(0.78-noCount*0.07,0.4)+'rem';
+  noBtn.style.padding=`${Math.max(0.55-noCount*0.06,0.1)}rem ${Math.max(1.3-noCount*0.18,0.3)}rem`;
+  noBtn.style.opacity=Math.max(1-noCount*0.14,0.05)+'';
 
-      const rm = document.getElementById('rm');
-      rm.textContent = noCount >= 6 ? '...Anh sẽ chờ em dù sao đi nữa 💓' : '';
-      rm.className = noCount >= 6 ? 'rm show' : 'rm';
+  const bw=noBtn.offsetWidth||80, bh=noBtn.offsetHeight||36;
+  const nx=Math.max(10,Math.min(GW()-bw-10,Math.random()*GW()));
+  const ny=Math.max(10,Math.min(GH()-bh-10,Math.random()*GH()));
+  noBtn.style.position='fixed';
+  noBtn.style.left=nx+'px';
+  noBtn.style.top=ny+'px';
+  noBtn.style.transition='left 0.15s ease,top 0.15s ease,font-size 0.3s,opacity 0.3s,padding 0.3s';
+  noBtn.style.zIndex='100';
 
-      if (noCount >= noLabels.length - 1) noBtn.style.pointerEvents = 'none';
-    }
+  document.getElementById('nc').textContent=ncMsgs[Math.min(noCount-1,ncMsgs.length-1)];
+  if(noCount>=noLabels.length-1){noBtn.style.pointerEvents='none';noBtn.style.opacity='0';}
+}
 
-    function onYes() {
-      document.getElementById('br').style.display = 'none';
-      document.getElementById('nc').textContent = '';
-      const msgs = [
-        '🎉 Anh hạnh phúc lắm! Cảm ơn em! 💖',
-        '🌸 Từ hôm nay anh sẽ luôn ở đây nhé~',
-        '💕 Trái tim anh đang nhảy múa rồi kìa!'
-      ];
-      const rm = document.getElementById('rm');
-      rm.textContent = msgs[Math.floor(Math.random()*msgs.length)];
-      rm.style.fontSize = '1.4rem';
-      rm.className = 'rm show';
+noBtn.addEventListener('mouseenter',runAway);
+noBtn.addEventListener('touchstart',runAway,{passive:true});
 
-      for (let i = 0; i < 5; i++)
-        setTimeout(() => spawnSparkles(
-          window.innerWidth*(0.2+Math.random()*0.6),
-          window.innerHeight*(0.2+Math.random()*0.6)
-        ), i*250);
-
-      const c = document.getElementById('fhc');
-      for (let i = 0; i < 10; i++) {
-        const el = document.createElement('div');
-        el.className = 'fh'; el.textContent = '💖';
-        el.style.cssText = `left:${Math.random()*90}%;font-size:${1.2+Math.random()}rem;animation-duration:${4+Math.random()*4}s;animation-delay:${Math.random()}s`;
-        c.appendChild(el);
-      }
-    }
-  </script>
+/* Yes */
+function onYes(){
+  document.getElementById('br').style.display='none';
+  document.getElementById('nc').textContent='';
+  noBtn.style.display='none';
+  launchConfetti();
+  for(let i=0;i<10;i++)setTimeout(()=>spawnSparkles(GW()*(0.1+Math.random()*0.8),GH()*(0.1+Math.random()*0.8),22),i*160);
+  makeFloats(20);
+  const msgs=['🎉 Anh hạnh phúc lắm! Cảm ơn em! 💖','🌸 Từ hôm nay anh sẽ luôn ở đây nhé~','💕 Trái tim anh đang nhảy múa rồi kìa!','🫶 Cùng nhau mình sẽ viết câu chuyện đẹp nhất!'];
+  const rm=document.getElementById('rm');
+  rm.textContent=msgs[Math.floor(Math.random()*msgs.length)];
+  rm.style.fontSize='1.4rem';rm.className='rm show';
+}
+</script>
 </body>
 </html>
