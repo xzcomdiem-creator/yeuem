@@ -1,44 +1,126 @@
-
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Be+Vietnam+Pro:wght@300;400;500&display=swap');
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  #cr { min-height: 100vh; background: #0a0010; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem 1rem; overflow: hidden; position: relative; font-family: 'Be Vietnam Pro', sans-serif; }
-  #sc { position: fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0; }
-  .fhc { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:1; }
-  .fh { position:absolute; bottom:-50px; animation:floatUp linear infinite; opacity:0; }
-  @keyframes floatUp { 0%{transform:translateY(0) rotate(0deg) scale(0.8);opacity:0} 10%{opacity:0.7} 90%{opacity:0.3} 100%{transform:translateY(-110vh) rotate(30deg) scale(1.1);opacity:0} }
-  .cw { position:relative; z-index:10; text-align:center; max-width:540px; width:100%; }
-  .ttl { font-family:'Dancing Script',cursive; font-size:clamp(1.6rem,5vw,2.4rem); color:#f9c0cb; margin-bottom:0.3rem; text-shadow:0 0 20px rgba(255,120,150,0.5); }
-  .sub { font-size:0.78rem; color:rgba(255,200,210,0.5); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:2.5rem; }
-  .hc { position:relative; width:180px; height:165px; margin:0 auto 1rem; cursor:pointer; filter:drop-shadow(0 0 30px rgba(255,80,120,0.5)); transition:filter 0.3s; }
-  .hc:hover { filter:drop-shadow(0 0 45px rgba(255,80,120,0.8)); }
-  .hsv { width:100%; height:100%; animation:hb 1.2s ease-in-out infinite; }
-  @keyframes hb { 0%,100%{transform:scale(1)} 14%{transform:scale(1.13)} 28%{transform:scale(1)} 42%{transform:scale(1.08)} 70%{transform:scale(1)} }
-  .hc:hover .hsv { animation:hbf 0.5s ease-in-out infinite; }
-  @keyframes hbf { 0%,100%{transform:scale(1)} 50%{transform:scale(1.18)} }
-  .pr { position:absolute; top:50%; left:50%; transform:translate(-50%,-52%); width:140px; height:140px; border-radius:50%; border:2px solid rgba(255,100,130,0.4); animation:pr 1.8s ease-out infinite; pointer-events:none; }
-  .pr:nth-child(2){animation-delay:0.6s} .pr:nth-child(3){animation-delay:1.2s}
-  @keyframes pr { 0%{transform:translate(-50%,-52%) scale(0.8);opacity:0.8} 100%{transform:translate(-50%,-52%) scale(2.2);opacity:0} }
-  .mc { background:rgba(255,255,255,0.04); border:1px solid rgba(255,150,180,0.15); border-radius:20px; padding:1.8rem 2rem; margin-bottom:1.5rem; backdrop-filter:blur(10px); position:relative; }
-  .mc::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(255,150,180,0.4),transparent); }
-  .mm { font-family:'Dancing Script',cursive; font-size:clamp(1.25rem,3.8vw,1.6rem); color:#ffe0e8; line-height:1.6; margin-bottom:1rem; }
-  .ms { font-size:0.82rem; color:rgba(255,200,215,0.6); line-height:1.7; font-weight:300; }
-  .br { display:flex; gap:1rem; justify-content:center; margin-bottom:1.2rem; flex-wrap:wrap; align-items:center; }
-  .byes { background:linear-gradient(135deg,#ff4d6d,#c9184a); color:white; border:none; border-radius:50px; font-size:0.9rem; font-weight:500; cursor:pointer; letter-spacing:0.05em; box-shadow:0 4px 20px rgba(255,77,109,0.4); transition:all 0.3s; font-family:'Be Vietnam Pro',sans-serif; padding:0.75rem 2.2rem; }
-  .byes:hover { transform:scale(1.06); box-shadow:0 6px 28px rgba(255,77,109,0.6); }
-  .bno { background:transparent; color:rgba(255,200,215,0.6); border:1px solid rgba(255,150,180,0.25); padding:0.6rem 1.6rem; border-radius:50px; font-size:0.82rem; cursor:pointer; transition:all 0.25s; font-family:'Be Vietnam Pro',sans-serif; }
-  .bno:hover { border-color:rgba(255,150,180,0.5); color:rgba(255,220,230,0.8); }
-  .rm { min-height:2.5rem; font-family:'Dancing Script',cursive; font-size:1.3rem; color:#ffb3c6; transition:all 0.5s; opacity:0; transform:translateY(5px); }
-  .rm.show { opacity:1; transform:translateY(0); }
-  .sp { position:fixed; pointer-events:none; z-index:20; }
-  .spe { position:absolute; border-radius:50%; animation:sa 0.8s ease-out forwards; }
-  @keyframes sa { 0%{transform:translate(0,0) scale(1);opacity:1} 100%{transform:translate(var(--tx),var(--ty)) scale(0);opacity:0} }
-  .hint { font-size:0.7rem; color:rgba(255,180,200,0.35); letter-spacing:0.12em; text-transform:uppercase; margin-bottom:1.5rem; animation:fio 3s ease-in-out infinite; }
-  @keyframes fio { 0%,100%{opacity:0.35} 50%{opacity:0.7} }
-  .no-count { font-size:0.7rem; color:rgba(255,150,170,0.45); margin-top:0.4rem; letter-spacing:0.05em; }
-</style>
-
-<div id="cr">
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Có điều muốn nói với em...</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Be+Vietnam+Pro:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      min-height:100vh;
+      background:#0a0010;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      padding:2rem 1rem;
+      overflow:hidden;
+      position:relative;
+      font-family:'Be Vietnam Pro', sans-serif;
+    }
+    #sc { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0; }
+    .fhc { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:1; }
+    .fh { position:absolute; bottom:-50px; animation:floatUp linear infinite; opacity:0; }
+    @keyframes floatUp {
+      0%   { transform:translateY(0) rotate(0deg) scale(0.8); opacity:0; }
+      10%  { opacity:0.7; }
+      90%  { opacity:0.3; }
+      100% { transform:translateY(-110vh) rotate(30deg) scale(1.1); opacity:0; }
+    }
+    .cw { position:relative; z-index:10; text-align:center; max-width:540px; width:100%; }
+    .ttl {
+      font-family:'Dancing Script', cursive;
+      font-size:clamp(1.6rem,5vw,2.4rem);
+      color:#f9c0cb;
+      margin-bottom:0.3rem;
+      text-shadow:0 0 20px rgba(255,120,150,0.5);
+    }
+    .sub { font-size:0.78rem; color:rgba(255,200,210,0.5); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:2.5rem; }
+    .hc {
+      position:relative; width:180px; height:165px;
+      margin:0 auto 1rem; cursor:pointer;
+      filter:drop-shadow(0 0 30px rgba(255,80,120,0.5));
+      transition:filter 0.3s;
+    }
+    .hc:hover { filter:drop-shadow(0 0 45px rgba(255,80,120,0.8)); }
+    .hsv { width:100%; height:100%; animation:hb 1.2s ease-in-out infinite; }
+    @keyframes hb {
+      0%,100%{transform:scale(1)} 14%{transform:scale(1.13)}
+      28%{transform:scale(1)} 42%{transform:scale(1.08)} 70%{transform:scale(1)}
+    }
+    .hc:hover .hsv { animation:hbf 0.5s ease-in-out infinite; }
+    @keyframes hbf { 0%,100%{transform:scale(1)} 50%{transform:scale(1.18)} }
+    .pr {
+      position:absolute; top:50%; left:50%;
+      transform:translate(-50%,-52%);
+      width:140px; height:140px; border-radius:50%;
+      border:2px solid rgba(255,100,130,0.4);
+      animation:pr 1.8s ease-out infinite; pointer-events:none;
+    }
+    .pr:nth-child(2){animation-delay:0.6s} .pr:nth-child(3){animation-delay:1.2s}
+    @keyframes pr {
+      0%  { transform:translate(-50%,-52%) scale(0.8); opacity:0.8; }
+      100%{ transform:translate(-50%,-52%) scale(2.2); opacity:0; }
+    }
+    .mc {
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,150,180,0.15);
+      border-radius:20px; padding:1.8rem 2rem;
+      margin-bottom:1.5rem; backdrop-filter:blur(10px); position:relative;
+    }
+    .mc::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:1px;
+      background:linear-gradient(90deg,transparent,rgba(255,150,180,0.4),transparent);
+    }
+    .mm {
+      font-family:'Dancing Script',cursive;
+      font-size:clamp(1.25rem,3.8vw,1.6rem);
+      color:#ffe0e8; line-height:1.6; margin-bottom:1rem;
+    }
+    .ms { font-size:0.82rem; color:rgba(255,200,215,0.6); line-height:1.7; font-weight:300; }
+    .br { display:flex; gap:1rem; justify-content:center; margin-bottom:1.2rem; flex-wrap:wrap; align-items:center; }
+    .byes {
+      background:linear-gradient(135deg,#ff4d6d,#c9184a);
+      color:white; border:none; border-radius:50px;
+      font-size:0.9rem; font-weight:500; cursor:pointer;
+      letter-spacing:0.05em;
+      box-shadow:0 4px 20px rgba(255,77,109,0.4);
+      transition:all 0.3s;
+      font-family:'Be Vietnam Pro',sans-serif;
+      padding:0.75rem 2.2rem;
+    }
+    .byes:hover { transform:scale(1.06); box-shadow:0 6px 28px rgba(255,77,109,0.6); }
+    .bno {
+      background:transparent; color:rgba(255,200,215,0.6);
+      border:1px solid rgba(255,150,180,0.25);
+      padding:0.6rem 1.6rem; border-radius:50px;
+      font-size:0.82rem; cursor:pointer; transition:all 0.25s;
+      font-family:'Be Vietnam Pro',sans-serif;
+    }
+    .bno:hover { border-color:rgba(255,150,180,0.5); color:rgba(255,220,230,0.8); }
+    .rm {
+      min-height:2.5rem; font-family:'Dancing Script',cursive;
+      font-size:1.3rem; color:#ffb3c6;
+      transition:all 0.5s; opacity:0; transform:translateY(5px);
+    }
+    .rm.show { opacity:1; transform:translateY(0); }
+    .sp { position:fixed; pointer-events:none; z-index:20; }
+    .spe { position:absolute; border-radius:50%; animation:sa 0.8s ease-out forwards; }
+    @keyframes sa {
+      0%  { transform:translate(0,0) scale(1); opacity:1; }
+      100%{ transform:translate(var(--tx),var(--ty)) scale(0); opacity:0; }
+    }
+    .hint {
+      font-size:0.7rem; color:rgba(255,180,200,0.35);
+      letter-spacing:0.12em; text-transform:uppercase;
+      margin-bottom:1.5rem; animation:fio 3s ease-in-out infinite;
+    }
+    @keyframes fio { 0%,100%{opacity:0.35} 50%{opacity:0.7} }
+    .no-count { font-size:0.7rem; color:rgba(255,150,170,0.45); margin-top:0.4rem; letter-spacing:0.05em; }
+  </style>
+</head>
+<body>
   <canvas id="sc"></canvas>
   <div class="fhc" id="fhc"></div>
 
@@ -79,134 +161,136 @@
     <p class="no-count" id="nc"></p>
     <p class="rm" id="rm"></p>
   </div>
-</div>
-<div class="sp" id="sl"></div>
 
-<script>
-const canvas = document.getElementById('sc');
-const ctx = canvas.getContext('2d');
-let stars = [], W, H;
+  <div class="sp" id="sl"></div>
 
-function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
-function initStars() {
-  stars = [];
-  for (let i = 0; i < 120; i++) stars.push({ x:Math.random()*W, y:Math.random()*H, r:Math.random()*1.5+0.3, a:Math.random(), da:(Math.random()-0.5)*0.008+0.003, s:Math.random()*0.08+0.02 });
-}
-function animStars() {
-  ctx.clearRect(0,0,W,H);
-  stars.forEach(s => {
-    s.a += s.da; if(s.a<=0||s.a>=1) s.da*=-1;
-    s.y -= s.s; if(s.y<0){s.y=H+5;s.x=Math.random()*W;}
-    ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-    ctx.fillStyle=`rgba(255,210,220,${s.a})`; ctx.fill();
-  });
-  requestAnimationFrame(animStars);
-}
-resize(); initStars(); animStars();
-window.addEventListener('resize', resize);
+  <script>
+    const canvas = document.getElementById('sc');
+    const ctx = canvas.getContext('2d');
+    let stars = [], W, H;
 
-(function makeFloats() {
-  const c = document.getElementById('fhc');
-  const em = ['❤️','💕','🌸','✨','💗','🌷','💖'];
-  for (let i=0;i<12;i++) {
-    const el = document.createElement('div');
-    el.className='fh';
-    el.textContent=em[Math.floor(Math.random()*em.length)];
-    el.style.cssText=`left:${Math.random()*95}%;font-size:${0.8+Math.random()*0.8}rem;animation-duration:${8+Math.random()*10}s;animation-delay:${Math.random()*10}s`;
-    c.appendChild(el);
-  }
-})();
+    function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+    function initStars() {
+      stars = [];
+      for (let i = 0; i < 120; i++)
+        stars.push({ x:Math.random()*W, y:Math.random()*H, r:Math.random()*1.5+0.3, a:Math.random(), da:(Math.random()-0.5)*0.008+0.003, s:Math.random()*0.08+0.02 });
+    }
+    function animStars() {
+      ctx.clearRect(0,0,W,H);
+      stars.forEach(s => {
+        s.a += s.da; if(s.a<=0||s.a>=1) s.da*=-1;
+        s.y -= s.s; if(s.y<0){s.y=H+5;s.x=Math.random()*W;}
+        ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+        ctx.fillStyle=`rgba(255,210,220,${s.a})`; ctx.fill();
+      });
+      requestAnimationFrame(animStars);
+    }
+    resize(); initStars(); animStars();
+    window.addEventListener('resize', resize);
 
-let clicked = false;
-function onHeart(e) {
-  spawnSparkles(e.clientX, e.clientY);
-  if (!clicked) {
-    clicked = true;
-    document.getElementById('mc').style.display='block';
-    document.getElementById('br').style.display='flex';
-  }
-}
+    (function makeFloats() {
+      const c = document.getElementById('fhc');
+      const em = ['❤️','💕','🌸','✨','💗','🌷','💖'];
+      for (let i=0;i<12;i++) {
+        const el = document.createElement('div');
+        el.className = 'fh';
+        el.textContent = em[Math.floor(Math.random()*em.length)];
+        el.style.cssText = `left:${Math.random()*95}%;font-size:${0.8+Math.random()*0.8}rem;animation-duration:${8+Math.random()*10}s;animation-delay:${Math.random()*10}s`;
+        c.appendChild(el);
+      }
+    })();
 
-function spawnSparkles(cx,cy) {
-  const layer=document.getElementById('sl');
-  const colors=['#ffb3c6','#ff6b8b','#ffd6e0','#ffffff','#ff4d6d'];
-  for(let i=0;i<14;i++){
-    const sp=document.createElement('div');
-    sp.className='spe';
-    const angle=(i/14)*Math.PI*2+Math.random()*0.5;
-    const dist=30+Math.random()*60;
-    const s=4+Math.random()*5;
-    sp.style.cssText=`left:${cx}px;top:${cy}px;background:${colors[Math.floor(Math.random()*colors.length)]};width:${s}px;height:${s}px;--tx:${Math.cos(angle)*dist}px;--ty:${Math.sin(angle)*dist}px;animation-duration:${0.5+Math.random()*0.5}s`;
-    layer.appendChild(sp);
-    setTimeout(()=>sp.remove(),1000);
-  }
-}
+    let clicked = false;
+    function onHeart(e) {
+      spawnSparkles(e.clientX, e.clientY);
+      if (!clicked) {
+        clicked = true;
+        document.getElementById('mc').style.display = 'block';
+        document.getElementById('br').style.display = 'flex';
+      }
+    }
 
-let noCount = 0;
-const yesBtn = document.getElementById('byes');
-let yesFontSize = 0.9;
-let yesPad = 2.2;
+    function spawnSparkles(cx, cy) {
+      const layer = document.getElementById('sl');
+      const colors = ['#ffb3c6','#ff6b8b','#ffd6e0','#ffffff','#ff4d6d'];
+      for (let i=0;i<14;i++) {
+        const sp = document.createElement('div');
+        sp.className = 'spe';
+        const angle = (i/14)*Math.PI*2 + Math.random()*0.5;
+        const dist = 30 + Math.random()*60;
+        const s = 4 + Math.random()*5;
+        sp.style.cssText = `left:${cx}px;top:${cy}px;background:${colors[Math.floor(Math.random()*colors.length)]};width:${s}px;height:${s}px;--tx:${Math.cos(angle)*dist}px;--ty:${Math.sin(angle)*dist}px;animation-duration:${0.5+Math.random()*0.5}s`;
+        layer.appendChild(sp);
+        setTimeout(() => sp.remove(), 1000);
+      }
+    }
 
-const noLabels = [
-  'Để em nghĩ thêm...',
-  'Em chưa chắc...',
-  'Hmm... chưa biết',
-  'Thôi để sau nhé',
-  'Không phải lúc này',
-  'Em xin lỗi...',
-  '(nút này sắp biến mất)'
-];
+    let noCount = 0;
+    const yesBtn = document.getElementById('byes');
+    let yesFontSize = 0.9;
+    let yesPad = 2.2;
 
-function onNo() {
-  noCount++;
+    const noLabels = [
+      'Để em nghĩ thêm...',
+      'Em chưa chắc...',
+      'Hmm... chưa biết',
+      'Thôi để sau nhé',
+      'Không phải lúc này',
+      'Em xin lỗi...',
+      '(nút này sắp biến mất)'
+    ];
 
-  yesFontSize = Math.min(yesFontSize + 0.18, 2.2);
-  yesPad = Math.min(yesPad + 0.35, 5.5);
-  yesBtn.style.fontSize = yesFontSize + 'rem';
-  yesBtn.style.padding = `${0.75 + noCount*0.08}rem ${yesPad}rem`;
-  yesBtn.style.boxShadow = `0 ${4+noCount*2}px ${20+noCount*6}px rgba(255,77,109,${Math.min(0.4+noCount*0.08,0.95)})`;
+    function onNo() {
+      noCount++;
+      yesFontSize = Math.min(yesFontSize + 0.18, 2.2);
+      yesPad = Math.min(yesPad + 0.35, 5.5);
+      yesBtn.style.fontSize = yesFontSize + 'rem';
+      yesBtn.style.padding = `${0.75 + noCount*0.08}rem ${yesPad}rem`;
+      yesBtn.style.boxShadow = `0 ${4+noCount*2}px ${20+noCount*6}px rgba(255,77,109,${Math.min(0.4+noCount*0.08,0.95)})`;
 
-  const noBtn = document.getElementById('bno');
-  if (noCount < noLabels.length) {
-    noBtn.textContent = noLabels[noCount];
-  }
+      const noBtn = document.getElementById('bno');
+      if (noCount < noLabels.length) noBtn.textContent = noLabels[noCount];
+      noBtn.style.fontSize = Math.max(0.82 - noCount*0.06, 0.5) + 'rem';
+      noBtn.style.padding = `${Math.max(0.6-noCount*0.05,0.2)}rem ${Math.max(1.6-noCount*0.15,0.5)}rem`;
+      noBtn.style.opacity = Math.max(1 - noCount*0.12, 0.15) + '';
 
-  noBtn.style.fontSize = Math.max(0.82 - noCount*0.06, 0.5) + 'rem';
-  noBtn.style.padding = `${Math.max(0.6-noCount*0.05,0.2)}rem ${Math.max(1.6-noCount*0.15,0.5)}rem`;
-  noBtn.style.opacity = Math.max(1 - noCount*0.12, 0.15) + '';
+      const nc = document.getElementById('nc');
+      nc.textContent = noCount === 1 ? 'Nút đồng ý đang lớn lên kìa... 👀' :
+                       noCount === 2 ? 'Thêm lần nữa là nó to hơn đó 😏' :
+                       noCount === 3 ? 'Nút "Có" đang chiếm sân khấu rồi 😂' :
+                       noCount >= 5 ? 'Trái tim anh đang chờ em thôi 🥺' : '';
 
-  const nc = document.getElementById('nc');
-  nc.textContent = noCount === 1 ? 'Nút đồng ý đang lớn lên kìa... 👀' :
-                   noCount === 2 ? 'Thêm lần nữa là nó to hơn đó 😏' :
-                   noCount === 3 ? 'Nút "Có" đang chiếm sân khấu rồi 😂' :
-                   noCount >= 5 ? 'Trái tim anh đang chờ em thôi 🥺' : '';
+      const rm = document.getElementById('rm');
+      rm.textContent = noCount >= 6 ? '...Anh sẽ chờ em dù sao đi nữa 💓' : '';
+      rm.className = noCount >= 6 ? 'rm show' : 'rm';
 
-  const rm = document.getElementById('rm');
-  rm.textContent = noCount >= 6 ? '...Anh sẽ chờ em dù sao đi nữa 💓' : '';
-  rm.className = noCount >= 6 ? 'rm show' : 'rm';
+      if (noCount >= noLabels.length - 1) noBtn.style.pointerEvents = 'none';
+    }
 
-  if (noCount >= noLabels.length - 1) {
-    noBtn.style.pointerEvents = 'none';
-  }
-}
+    function onYes() {
+      document.getElementById('br').style.display = 'none';
+      document.getElementById('nc').textContent = '';
+      const msgs = [
+        '🎉 Anh hạnh phúc lắm! Cảm ơn em! 💖',
+        '🌸 Từ hôm nay anh sẽ luôn ở đây nhé~',
+        '💕 Trái tim anh đang nhảy múa rồi kìa!'
+      ];
+      const rm = document.getElementById('rm');
+      rm.textContent = msgs[Math.floor(Math.random()*msgs.length)];
+      rm.style.fontSize = '1.5rem';
+      rm.className = 'rm show';
 
-function onYes() {
-  document.getElementById('br').style.display='none';
-  document.getElementById('nc').textContent='';
-  const msgs = ['🎉 Anh hạnh phúc lắm! Cảm ơn em! 💖','🌸 Từ hôm nay anh sẽ luôn ở đây nhé~','💕 Trái tim anh đang nhảy múa rồi kìa!'];
-  const rm = document.getElementById('rm');
-  rm.textContent = msgs[Math.floor(Math.random()*msgs.length)];
-  rm.style.fontSize = '1.5rem';
-  rm.className = 'rm show';
+      for (let i=0;i<5;i++)
+        setTimeout(() => spawnSparkles(window.innerWidth*(0.2+Math.random()*0.6), window.innerHeight*(0.2+Math.random()*0.6)), i*250);
 
-  for(let i=0;i<5;i++) setTimeout(()=>spawnSparkles(window.innerWidth*(0.2+Math.random()*0.6), window.innerHeight*(0.2+Math.random()*0.6)),i*250);
-
-  const c=document.getElementById('fhc');
-  for(let i=0;i<10;i++){
-    const el=document.createElement('div');
-    el.className='fh'; el.textContent='💖';
-    el.style.cssText=`left:${Math.random()*90}%;font-size:${1.2+Math.random()}rem;animation-duration:${4+Math.random()*4}s;animation-delay:${Math.random()}s`;
-    c.appendChild(el);
-  }
-}
-</script>
+      const c = document.getElementById('fhc');
+      for (let i=0;i<10;i++) {
+        const el = document.createElement('div');
+        el.className = 'fh'; el.textContent = '💖';
+        el.style.cssText = `left:${Math.random()*90}%;font-size:${1.2+Math.random()}rem;animation-duration:${4+Math.random()*4}s;animation-delay:${Math.random()}s`;
+        c.appendChild(el);
+      }
+    }
+  </script>
+</body>
+</html>
